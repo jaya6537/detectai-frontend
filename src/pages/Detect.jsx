@@ -55,7 +55,7 @@ const Detect = () => {
         // 1. Standard Dataset Model (Admin Only)
         if (isAdmin) {
             requests.push(
-                api.post('/detect', { text })
+                api.post('/detect/', { text })
                    .then(res => setResult(res.data))
                    .catch(err => setError(err.response?.data?.detail || "An error occurred during analysis."))
             );
