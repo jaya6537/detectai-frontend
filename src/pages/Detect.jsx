@@ -52,12 +52,14 @@ const Detect = () => {
         // Map requests to promise array so they can run concurrently
         const requests = [];
 
-        // 1. Standard Dataset Model (Available to All Users - Primary)
-        requests.push(
-            api.post('/detect', { text })
-               .then(res => setResult(res.data))
-               .catch(err => setError(err.response?.data?.detail || "An error occurred during analysis."))
-        );
+        // 1. Standard Dataset Model (Admin Only)
+        if (isAdmin) {
+            requests.push(
+                api.post('/detect', { text })
+                   .then(res => setResult(res.data))
+                   .catch(err => setError(err.response?.data?.detail || "An error occurred during analysis."))
+            );
+        }
 
         // 2. Kaggle Dataset Model (Available to All Users - Beta)
         requests.push(
@@ -231,8 +233,8 @@ const Detect = () => {
 
             {/* Results Section */}
             {!loading && (result || error || kaggleResult || kaggleError) && (
-                <div className="grid gap-8 mb-8 grid-cols-1 lg:grid-cols-2">
-                    {renderResultCard("DetectAI-Pro Primary Pipeline", result, error)}
+                <div className={`grid gap-8 mb-8 ${isAdmin ? 'grid-cols-1 lg:grid-cols-2' : 'grid-cols-1 max-w-3xl mx-auto'}`}>
+                    {isAdmin && renderResultCard("DetectAI-Pro Primary Pipeline", result, error)}
                     {renderResultCard("DetectAI-Pro V2 (Kaggle Architecture)", kaggleResult, kaggleError)}
                 </div>
             )}
