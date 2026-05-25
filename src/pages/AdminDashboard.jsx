@@ -86,24 +86,24 @@ const AdminDashboard = () => {
     );
 
     return (
-        <div className="max-w-6xl mx-auto mt-8">
-            <div className="mb-8">
-                <h1 className="text-3xl font-bold text-gray-900 flex items-center gap-3">
-                    <ShieldCheck className="h-8 w-8 text-indigo-600" />
+        <div className="max-w-6xl mx-auto mt-4 sm:mt-8 px-4">
+            <div className="mb-8 text-center sm:text-left">
+                <h1 className="text-2xl sm:text-3xl font-extrabold text-gray-900 flex flex-col sm:flex-row items-center justify-center sm:justify-start gap-3">
+                    <ShieldCheck className="h-7 w-7 sm:h-8 sm:w-8 text-indigo-600" />
                     Admin Dashboard
                 </h1>
-                <p className="text-gray-600 mt-2">Manage users and global system status.</p>
+                <p className="text-gray-600 mt-2 text-sm sm:text-base">Manage users and global system status.</p>
             </div>
 
-            <div className="bg-white rounded-2xl shadow-sm border border-gray-300 overflow-hidden">
+            <div className="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
                 {error && (
                     <div className="p-4 bg-red-50 text-red-700 border-b border-red-100 text-sm">
                         {error}
                     </div>
                 )}
 
-                <div className="p-4 border-b border-gray-300 bg-gray-50 flex justify-between items-center">
-                    <div className="relative w-72">
+                <div className="p-4 border-b border-gray-250 bg-gray-50 flex flex-col sm:flex-row gap-4 justify-between items-center">
+                    <div className="relative w-full sm:w-72">
                         <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 h-4 w-4" />
                         <input
                             type="text"
@@ -113,26 +113,26 @@ const AdminDashboard = () => {
                             className="w-full pl-9 pr-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-1 focus:ring-indigo-500"
                         />
                     </div>
-                    <div className="text-sm text-gray-500 font-medium tracking-wide flex items-center gap-2">
+                    <div className="text-xs sm:text-sm text-gray-500 font-semibold tracking-wide flex items-center gap-2">
                         <Users className="h-4 w-4" /> Total Users: {users.length}
                     </div>
                 </div>
 
-                <div className="overflow-x-auto">
-                    <table className="w-full text-left border-collapse">
+                <div className="overflow-x-auto w-full">
+                    <table className="w-full text-left border-collapse min-w-[750px]">
                         <thead>
-                            <tr className="bg-gray-50 text-gray-500 text-sm uppercase tracking-wider">
-                                <th className="px-6 py-4 font-medium">ID</th>
-                                <th className="px-6 py-4 font-medium">User Details</th>
-                                <th className="px-6 py-4 font-medium">Role</th>
-                                <th className="px-6 py-4 font-medium">Status</th>
-                                <th className="px-6 py-4 font-medium text-right">Actions</th>
+                            <tr className="bg-gray-50 text-gray-500 text-xs sm:text-sm uppercase tracking-wider border-b border-gray-150">
+                                <th className="px-6 py-4 font-semibold">ID</th>
+                                <th className="px-6 py-4 font-semibold">User Details</th>
+                                <th className="px-6 py-4 font-semibold">Role</th>
+                                <th className="px-6 py-4 font-semibold">Status</th>
+                                <th className="px-6 py-4 font-semibold text-right">Actions</th>
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-gray-100">
                             {loading ? (
                                 <tr>
-                                    <td colSpan="5" className="px-6 py-8 text-center text-gray-500">
+                                    <td colSpan="5" className="px-6 py-12 text-center text-gray-500">
                                         <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-indigo-600 mx-auto mb-2"></div>
                                         Fetching users...
                                     </td>
@@ -140,30 +140,30 @@ const AdminDashboard = () => {
                             ) : filteredUsers.length === 0 ? (
                                 <tr>
                                     <td colSpan="5" className="px-6 py-12 text-center text-gray-500">
-                                        <Users className="h-12 w-12 text-gray-300 mx-auto mb-3" />
+                                        <Users className="h-10 w-10 text-gray-300 mx-auto mb-3" />
                                         No users found matching your search.
                                     </td>
                                 </tr>
                             ) : (
                                 filteredUsers.map((u) => (
                                     <tr key={u.id} className="hover:bg-gray-50 transition-colors">
-                                        <td className="px-6 py-4 text-sm text-gray-500">
+                                        <td className="px-6 py-4 text-xs sm:text-sm text-gray-500">
                                             #{u.id}
                                         </td>
                                         <td className="px-6 py-4">
-                                            <div className="text-sm font-semibold text-gray-900">{u.username}</div>
+                                            <div className="text-xs sm:text-sm font-semibold text-gray-900">{u.username}</div>
                                             <div className="text-xs text-gray-500">{u.email || 'No email provided'}</div>
-                                            <div className="text-xs text-gray-400 mt-1">Joined: {new Date(u.created_at).toLocaleDateString()}</div>
+                                            <div className="text-[10px] sm:text-xs text-gray-400 mt-1">Joined: {new Date(u.created_at).toLocaleDateString()}</div>
                                         </td>
                                         <td className="px-6 py-4">
                                             {u.is_superuser ? (
-                                                <span className="px-2 py-1 text-xs font-semibold rounded-md bg-purple-100 text-purple-700">Admin</span>
+                                                <span className="px-2.5 py-1 text-xs font-semibold rounded-md bg-purple-50 text-purple-700 border border-purple-100">Admin</span>
                                             ) : (
-                                                <span className="px-2 py-1 text-xs font-semibold rounded-md bg-gray-100 text-gray-600">User</span>
+                                                <span className="px-2.5 py-1 text-xs font-semibold rounded-md bg-gray-50 text-gray-600 border border-gray-100">User</span>
                                             )}
                                         </td>
                                         <td className="px-6 py-4">
-                                            <span className={`px-3 py-1 text-xs font-medium rounded-full ${u.is_active ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}`}>
+                                            <span className={`px-2.5 py-1 text-xs font-semibold rounded-full ${u.is_active ? 'bg-green-50 text-green-700 border border-green-100' : 'bg-red-50 text-red-700 border border-red-100'}`}>
                                                 {u.is_active ? 'Active' : 'Inactive'}
                                             </span>
                                         </td>
@@ -172,14 +172,14 @@ const AdminDashboard = () => {
                                                 <>
                                                     <button
                                                         onClick={() => toggleStatus(u.id, u.is_active)}
-                                                        className={`p-2 rounded-lg border text-sm flex items-center justify-center transition-colors ${u.is_active ? 'border-yellow-200 text-yellow-600 hover:bg-yellow-50' : 'border-green-200 text-green-600 hover:bg-green-50'}`}
+                                                        className={`p-2 rounded-lg border text-xs sm:text-sm flex items-center justify-center transition-colors ${u.is_active ? 'border-yellow-200 text-yellow-600 hover:bg-yellow-50' : 'border-green-200 text-green-600 hover:bg-green-50'}`}
                                                         title={u.is_active ? "Deactivate User" : "Activate User"}
                                                     >
                                                         <Power className="h-4 w-4" />
                                                     </button>
                                                     <button
                                                         onClick={() => deleteUser(u.id)}
-                                                        className="p-2 rounded-lg border border-red-200 text-red-600 hover:bg-red-50 text-sm flex items-center justify-center transition-colors"
+                                                        className="p-2 rounded-lg border border-red-200 text-red-650 hover:bg-red-50 text-xs sm:text-sm flex items-center justify-center transition-colors"
                                                         title="Delete User"
                                                     >
                                                         <Trash2 className="h-4 w-4" />
@@ -197,18 +197,18 @@ const AdminDashboard = () => {
 
             {/* Model Management Section */}
             <div className="mt-10 mb-8">
-                <h2 className="text-2xl font-bold text-gray-900 flex items-center gap-3 mb-5">
+                <h2 className="text-xl sm:text-2xl font-extrabold text-gray-900 flex items-center gap-3 mb-5 text-center sm:text-left">
                     <Database className="h-6 w-6 text-indigo-600" />
                     Model Management
                 </h2>
                 <div className="grid grid-cols-1 gap-6">
                     {/* HYBRID Card */}
-                    <div className="bg-white rounded-2xl shadow-sm border border-indigo-200 p-8 flex flex-col justify-between relative overflow-hidden">
-                        <div className="absolute top-0 right-0 p-4">
-                            <span className="bg-indigo-100 text-indigo-800 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Active Neural Spec</span>
+                    <div className="bg-white rounded-2xl shadow-sm border border-indigo-200 p-6 sm:p-8 flex flex-col justify-between relative overflow-hidden">
+                        <div className="absolute top-0 right-0 p-4 hidden sm:block">
+                            <span className="bg-indigo-50 text-indigo-850 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider border border-indigo-100">Active Neural Spec</span>
                         </div>
                         <div>
-                            <h3 className="text-2xl font-bold text-gray-900 flex items-center gap-3">
+                            <h3 className="text-xl sm:text-2xl font-bold text-gray-900 flex flex-wrap items-center gap-3">
                                 Unified BERT-T5 Hybrid Architecture
                                 {modelStatus?.hybrid?.is_training && (
                                     <span className="flex items-center gap-1.5 text-xs font-semibold px-2.5 py-1 bg-blue-100 text-blue-700 rounded-full">
@@ -217,51 +217,51 @@ const AdminDashboard = () => {
                                     </span>
                                 )}
                             </h3>
-                            <p className="text-gray-600 mt-3 text-base leading-relaxed max-w-3xl">Combines BERT contextual embeddings with T5 text-to-text generative understanding for maximum precision mapping. Expected detection accuracy: 89%-91%.</p>
+                            <p className="text-gray-600 mt-3 text-sm sm:text-base leading-relaxed max-w-3xl">Combines BERT contextual embeddings with T5 text-to-text generative understanding for maximum precision mapping. Expected detection accuracy: 89%-91%.</p>
                             
                             {/* Neural Network Abstract Architecture Animation (Visible only when training) */}
                             {modelStatus?.hybrid?.is_training && (
-                                <div className="mt-8 flex items-center justify-center gap-3 py-6 bg-gradient-to-r from-gray-50 via-indigo-50/30 to-gray-50 rounded-xl border border-gray-100 relative overflow-hidden">
+                                <div className="mt-8 flex flex-wrap sm:flex-nowrap items-center justify-center gap-4 sm:gap-3 py-6 bg-gradient-to-r from-gray-50 via-indigo-50/20 to-gray-50 rounded-xl border border-gray-150 relative overflow-hidden">
                                     {/* Background decorative pulse */}
-                                    <div className="absolute top-1/2 left-1/4 w-32 h-32 bg-blue-400/10 rounded-full blur-2xl animate-pulse -translate-y-1/2"></div>
-                                    <div className="absolute top-1/2 right-1/4 w-32 h-32 bg-purple-400/10 rounded-full blur-2xl animate-pulse -translate-y-1/2" style={{ animationDelay: '1s' }}></div>
+                                    <div className="absolute top-1/2 left-1/4 w-32 h-32 bg-blue-400/5 rounded-full blur-2xl animate-pulse -translate-y-1/2"></div>
+                                    <div className="absolute top-1/2 right-1/4 w-32 h-32 bg-purple-400/5 rounded-full blur-2xl animate-pulse -translate-y-1/2" style={{ animationDelay: '1s' }}></div>
 
                                     {/* BERT Node */}
-                                    <div className="flex flex-col items-center gap-2 z-10">
-                                        <div className="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center shadow-[0_0_20px_rgba(37,99,235,0.6)] animate-pulse">
+                                    <div className="flex flex-col items-center gap-2 z-10 w-24">
+                                        <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-blue-600 flex items-center justify-center shadow-[0_0_20px_rgba(37,99,235,0.6)] animate-pulse">
                                             <div className="w-3 h-3 rounded-full bg-white animate-ping"></div>
                                         </div>
-                                        <span className="text-[10px] font-bold text-blue-700 uppercase tracking-widest">BERT Embeds</span>
+                                        <span className="text-[9px] sm:text-[10px] font-bold text-blue-700 uppercase tracking-widest text-center">BERT Embeds</span>
                                     </div>
 
                                     {/* Data Stream 1 */}
-                                    <div className="flex space-x-1.5 z-10">
-                                        <div className="w-2 h-2 rounded-full bg-indigo-400 animate-bounce" style={{ animationDelay: '0ms' }}></div>
-                                        <div className="w-2 h-2 rounded-full bg-indigo-500 animate-bounce" style={{ animationDelay: '150ms' }}></div>
-                                        <div className="w-2 h-2 rounded-full bg-indigo-600 animate-bounce" style={{ animationDelay: '300ms' }}></div>
+                                    <div className="flex sm:flex space-x-1.5 z-10">
+                                        <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-indigo-400 animate-bounce" style={{ animationDelay: '0ms' }}></div>
+                                        <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-indigo-500 animate-bounce" style={{ animationDelay: '150ms' }}></div>
+                                        <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-indigo-600 animate-bounce" style={{ animationDelay: '300ms' }}></div>
                                     </div>
 
                                     {/* Linear Bridge Node */}
-                                    <div className="flex flex-col items-center gap-2 z-10">
-                                        <div className="w-10 h-10 rounded-full bg-indigo-600 flex items-center justify-center shadow-[0_0_20px_rgba(79,70,229,0.6)] animate-pulse" style={{ animationDelay: '500ms' }}>
+                                    <div className="flex flex-col items-center gap-2 z-10 w-24">
+                                        <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-indigo-600 flex items-center justify-center shadow-[0_0_20px_rgba(79,70,229,0.6)] animate-pulse" style={{ animationDelay: '500ms' }}>
                                             <div className="w-3 h-3 rounded-full bg-white"></div>
                                         </div>
-                                        <span className="text-[10px] font-bold text-indigo-700 uppercase tracking-widest">Linear Bridge</span>
+                                        <span className="text-[9px] sm:text-[10px] font-bold text-indigo-700 uppercase tracking-widest text-center">Linear Bridge</span>
                                     </div>
 
                                     {/* Data Stream 2 */}
-                                    <div className="flex space-x-1.5 z-10">
-                                        <div className="w-2 h-2 rounded-full bg-purple-400 animate-bounce" style={{ animationDelay: '450ms' }}></div>
-                                        <div className="w-2 h-2 rounded-full bg-purple-500 animate-bounce" style={{ animationDelay: '600ms' }}></div>
-                                        <div className="w-2 h-2 rounded-full bg-purple-600 animate-bounce" style={{ animationDelay: '750ms' }}></div>
+                                    <div className="flex sm:flex space-x-1.5 z-10">
+                                        <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-purple-400 animate-bounce" style={{ animationDelay: '450ms' }}></div>
+                                        <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-purple-500 animate-bounce" style={{ animationDelay: '600ms' }}></div>
+                                        <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-purple-600 animate-bounce" style={{ animationDelay: '750ms' }}></div>
                                     </div>
 
                                     {/* T5 Node */}
-                                    <div className="flex flex-col items-center gap-2 z-10">
-                                        <div className="w-10 h-10 rounded-full bg-purple-600 flex items-center justify-center shadow-[0_0_20px_rgba(147,51,234,0.6)] animate-pulse" style={{ animationDelay: '1000ms' }}>
+                                    <div className="flex flex-col items-center gap-2 z-10 w-24">
+                                        <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-purple-600 flex items-center justify-center shadow-[0_0_20px_rgba(147,51,234,0.6)] animate-pulse" style={{ animationDelay: '1000ms' }}>
                                             <div className="w-3 h-3 rounded-full bg-white animate-ping" style={{ animationDelay: '1000ms' }}></div>
                                         </div>
-                                        <span className="text-[10px] font-bold text-purple-700 uppercase tracking-widest">T5 Decode</span>
+                                        <span className="text-[9px] sm:text-[10px] font-bold text-purple-700 uppercase tracking-widest text-center">T5 Decode</span>
                                     </div>
                                 </div>
                             )}

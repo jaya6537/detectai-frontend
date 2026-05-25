@@ -118,7 +118,7 @@ const Detect = () => {
                             ></div>
                         </div>
 
-                        <div className="flex gap-3 mt-auto">
+                        <div className="flex flex-col sm:flex-row gap-3 mt-auto w-full">
                             <button onClick={() => { navigator.clipboard.writeText(`Prediction: ${isAI ? 'AI Generated' : 'Human Written'} - Confidence: ${confidencePercent}%`) }} className="flex-1 bg-gray-50 border border-gray-200 hover:bg-gray-100 text-gray-700 py-2.5 rounded-xl text-sm font-semibold flex justify-center items-center gap-2 transition-all hover:shadow-sm">
                                 <CopyCheck className="h-4 w-4" /> Copy
                             </button>
@@ -133,47 +133,47 @@ const Detect = () => {
     };
 
     return (
-        <div className="max-w-7xl mx-auto mt-8 px-4">
-            <div className="mb-8">
-                <h1 className="text-3xl font-bold text-gray-900 flex items-center gap-3">
-                    <Sparkles className="h-8 w-8 text-blue-600" />
+        <div className="max-w-7xl mx-auto mt-4 sm:mt-8 px-4">
+            <div className="mb-8 text-center sm:text-left">
+                <h1 className="text-2xl sm:text-3xl font-extrabold text-gray-900 flex flex-col sm:flex-row items-center justify-center sm:justify-start gap-3">
+                    <Sparkles className="h-7 w-7 sm:h-8 sm:w-8 text-blue-600 animate-pulse" />
                     AI Text Analysis
                 </h1>
-                <p className="text-gray-600 mt-2">Paste your content below to detect if it was written by an AI or a Human.</p>
+                <p className="text-gray-600 mt-2 text-sm sm:text-base">Paste your content below to detect if it was written by an AI or a Human.</p>
                 {/* Banner available to all users */}
-                <div className="mt-3 inline-block bg-blue-50 border border-blue-200 text-blue-700 text-sm px-4 py-1.5 rounded-lg font-medium">
+                <div className="mt-4 inline-block bg-blue-50 border border-blue-200 text-blue-700 text-xs sm:text-sm px-4 py-1.5 rounded-lg font-medium">
                     {isAdmin ? "🛡️ Multi-Model Admin Evaluation Enabled" : "🛡️ Powered by DetectAI V2 Architecture"}
                 </div>
             </div>
 
-            <div className="bg-white rounded-2xl shadow-sm border border-gray-300 overflow-hidden mb-8">
-                <div className="p-6">
+            <div className="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden mb-8">
+                <div className="p-4 sm:p-6">
                     <textarea
-                        className="w-full h-64 p-4 text-gray-700 bg-gray-50 border border-gray-300 rounded-xl outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white resize-none transition-all"
+                        className="w-full h-48 sm:h-64 p-4 text-gray-700 bg-gray-50 border border-gray-200 rounded-xl outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white resize-none transition-all text-sm sm:text-base"
                         placeholder="Paste article, essay, or any text here (minimum 10 characters)..."
                         value={text}
                         onChange={(e) => setText(e.target.value)}
                     ></textarea>
 
-                    <div className="flex justify-between items-center mt-4 text-sm text-gray-500">
+                    <div className="flex justify-between items-center mt-4 text-xs sm:text-sm text-gray-500">
                         <span>{text.length} characters</span>
                         <button
                             onClick={() => setText('')}
-                            className="text-gray-400 hover:text-red-500 transition-colors"
+                            className="text-gray-400 hover:text-red-500 transition-colors font-medium"
                         >
                             Clear Text
                         </button>
                     </div>
                 </div>
 
-                <div className="px-6 py-4 bg-gray-50 border-t border-gray-100 flex items-center justify-between">
-                    <div className="text-sm text-red-600 font-medium">
-                        {error && <span className="flex items-center gap-1"><BadgeAlert className="h-4 w-4" /> {error}</span>}
+                <div className="px-4 py-4 sm:px-6 bg-gray-50 border-t border-gray-100 flex flex-col sm:flex-row gap-4 items-center justify-between">
+                    <div className="text-xs sm:text-sm text-red-600 font-medium w-full sm:w-auto text-center sm:text-left">
+                        {error && <span className="flex items-center justify-center sm:justify-start gap-1"><BadgeAlert className="h-4 w-4" /> {error}</span>}
                     </div>
                     <button
                         onClick={handleAnalyze}
                         disabled={loading || text.length === 0}
-                        className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2.5 px-6 rounded-xl shadow-sm transition-all flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed ml-auto"
+                        className="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2.5 px-6 rounded-xl shadow-sm transition-all flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed sm:ml-auto"
                     >
                         {loading ? (
                             <><div className="h-4 w-4 rounded-full border-2 border-white border-t-transparent animate-spin"></div> Analyzing...</>
@@ -185,16 +185,16 @@ const Detect = () => {
             </div>
 
             {loading && (
-                <div className="bg-white rounded-2xl shadow-sm border border-gray-300 p-8 animate-in slide-in-from-bottom-4 fade-in duration-500 overflow-hidden relative mb-8">
-                    <div className="absolute -top-24 -left-24 w-48 h-48 bg-blue-400 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse"></div>
-                    <div className="absolute -bottom-24 -right-24 w-48 h-48 bg-indigo-400 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse" style={{ animationDelay: '1s' }}></div>
+                <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-4 sm:p-8 animate-in slide-in-from-bottom-4 fade-in duration-500 overflow-hidden relative mb-8">
+                    <div className="absolute -top-24 -left-24 w-48 h-48 bg-blue-400/10 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse"></div>
+                    <div className="absolute -bottom-24 -right-24 w-48 h-48 bg-indigo-400/10 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse" style={{ animationDelay: '1s' }}></div>
                     
                     <div className="relative flex flex-col items-center justify-center py-4">
-                        <div className="w-full max-w-2xl mx-auto bg-gray-50 border border-gray-200 rounded-xl p-5 relative overflow-hidden h-44 mb-8 shadow-inner">
+                        <div className="w-full max-w-2xl mx-auto bg-gray-50 border border-gray-150 rounded-xl p-4 sm:p-5 relative overflow-hidden h-44 mb-8 shadow-inner">
                             <div className="absolute top-0 left-0 w-full h-[2px] bg-blue-500 shadow-[0_0_20px_5px_rgba(59,130,246,0.7)] animate-scan z-20"></div>
-                            <div className="absolute top-0 left-0 w-full h-[200px] bg-gradient-to-t from-blue-500/20 to-transparent animate-scan pointer-events-none z-10 transform -translate-y-full"></div>
-                            <div className="text-sm font-mono leading-relaxed opacity-60 pointer-events-none">
-                               {text.split(' ').slice(0, 50).map((word, i) => {
+                            <div className="absolute top-0 left-0 w-full h-[200px] bg-gradient-to-t from-blue-500/10 to-transparent animate-scan pointer-events-none z-10 transform -translate-y-full"></div>
+                            <div className="text-xs sm:text-sm font-mono leading-relaxed opacity-60 pointer-events-none break-words whitespace-normal max-h-full overflow-hidden">
+                               {text.split(' ').slice(0, 45).map((word, i) => {
                                    const isHighlight = i % 8 === 0;
                                    const isWarning = i % 13 === 0;
                                    return (
@@ -207,7 +207,7 @@ const Detect = () => {
                             </div>
                         </div>
                         
-                        <h3 className="text-xl font-bold text-gray-900 mb-2 flex items-center gap-2">
+                        <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-2 flex items-center gap-2 text-center">
                            <Activity className="h-5 w-5 text-blue-600 animate-pulse" />
                            Running Multi-Model Neural Evaluation
                         </h3>
@@ -215,13 +215,13 @@ const Detect = () => {
                         <div className="h-6 overflow-hidden flex justify-center items-center w-full relative">
                             <p 
                                 key={loadingStep} 
-                                className="text-blue-600 font-medium text-sm animate-in zoom-in-95 fade-in duration-300 absolute"
+                                className="text-blue-600 font-medium text-xs sm:text-sm animate-in zoom-in-95 fade-in duration-300 absolute"
                             >
                                 {loadingPhrases[loadingStep]}
                             </p>
                         </div>
                         
-                        <div className="w-64 bg-gray-100 rounded-full h-1.5 mt-6 overflow-hidden">
+                        <div className="w-48 sm:w-64 bg-gray-100 rounded-full h-1.5 mt-6 overflow-hidden">
                             <div 
                                 className="bg-blue-600 h-1.5 rounded-full transition-all duration-500 ease-out"
                                 style={{ width: `${Math.min(((loadingStep + 1) / loadingPhrases.length) * 100, 100)}%` }}

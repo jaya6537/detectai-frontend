@@ -35,8 +35,8 @@ const Register = () => {
     };
 
     return (
-        <div className="max-w-md mx-auto mt-10">
-            <div className="bg-white p-8 rounded-2xl shadow-sm border border-gray-300">
+        <div className="w-full max-w-md mx-auto mt-6 sm:mt-10 px-4">
+            <div className="bg-white p-6 sm:p-8 rounded-2xl shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
                 <div className="text-center mb-8">
                     <div className="inline-flex items-center justify-center mb-4">
                         <Logo className="h-16 w-16 drop-shadow-sm" />
